@@ -10,7 +10,7 @@ import com.niit.services.CategoryService;
 import com.niit.services.SupplierService;
 import com.niit.model.Category;
 import com.niit.services.ProductService;
-
+import com.niit.model.Product;
 @Controller
 public class AdminController {
 	@Autowired
@@ -32,7 +32,7 @@ public class AdminController {
 	ProductService service2;
 	
 	@Autowired
-	com.niit.model.Product product;
+	Product product;
 	
 	@RequestMapping("/Product")
 	public ModelAndView Product()

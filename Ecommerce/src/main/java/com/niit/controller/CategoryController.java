@@ -47,8 +47,6 @@ session.setAttribute("categoryList", service.getAllCategory());
 	
 	}
 	
-	
-	
 	@RequestMapping(value="/admin/editCategory/{id}", method=RequestMethod.GET)
 	public ModelAndView edit(@PathVariable("id") String id)
 	{

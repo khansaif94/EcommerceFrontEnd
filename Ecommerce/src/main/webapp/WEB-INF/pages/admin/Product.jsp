@@ -1,9 +1,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -17,6 +17,7 @@
 </style>
 </head>
 <body>
+<%@include file="..\navbar.jsp" %>
 
 <h1>Product Form</h1>
 <c:if test="${not empty msg}">
@@ -32,7 +33,7 @@ ${msg}
 <c:url var="saveUrl" value="/admin/editProduct" />
 </c:if>
 
-<form:form modelAttribute="product" method="POST" action="${saveUrl}">
+<form:form enctype="multipart/form-data" modelAttribute="product" method="POST" action="${saveUrl}">
  <table>
   <tr>
    <td><form:label path="productid">ProductId:</form:label></td>
@@ -63,18 +64,45 @@ ${msg}
    <td><form:input path="quantity"/></td>
    <td></td>
   </tr>
-  
-  <form:select path="categoryid" >
-  <c:forEach items="${categoryList}" var="cat">
-  	<form:option value="${cat.categoryid}" >${cat.categoryname}</form:option>
-  </c:forEach>
-  </form:select>
-  
+  <tr>
+   		<td><form:label path="categoryid">Category:</form:label></td>
+  		<td>
+  			<form:select path="categoryid" >
+  					<c:forEach items="${categoryList}" var="cat">
+  							<form:option value="${cat.categoryid}" >${cat.categoryname}</form:option>
+					  </c:forEach>
+ 			 </form:select>
+  		</td>
+        <td></td>
+  </tr>
+ 
+  <tr>
+  <td><form:label path="supplierid">Supplier:</form:label></td>
+  <td>
   <form:select path="supplierid" >
   <c:forEach items="${supplierList}" var="sup">
   	<form:option value="${sup.supplierid}" >${pro.suppliername}</form:option>
   </c:forEach>
   </form:select>
+  </td>
+   <td></td>
+  </tr>
+   <tr>
+   <td>
+   <div class="form-group">
+ <label>Upload Image</label>
+ </div>
+ </td>
+ <td>
+  <form:input type="file" path="file"  class="form-control" />
+  </td><td>
+   <form:errors path="file" >
+  <p class="errStyle">
+ * Cannot be blank
+ </p>
+ </form:errors>
+ </td>
+ </tr>
    
  </table> 
  <c:if test="${not isEdit}">
@@ -88,13 +116,17 @@ ${msg}
 
 <table border="1">
 <tr>
+<th></th>
 		<th>ID</th>
 		<th>NAME</th>
 		<th>PRICE</th>
 		<th>QTY</th>
+		<th></th>
+		<th></th>
 </tr>
 <c:forEach var="pro"  items="${productList}">
 <tr>
+<td><img height="100" width="100" src="resources/images/${pro.image}"> </td>
 	<td>${pro.productid}</td>
 	<td>${pro.productname}</td>
 	<td>${pro.price}</td>
@@ -104,6 +136,6 @@ ${msg}
 </tr>
 
 </c:forEach>
-</table>
+<%@include file="..\footer.jsp" %>
 </body>
 </html>

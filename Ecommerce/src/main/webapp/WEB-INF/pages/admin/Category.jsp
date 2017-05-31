@@ -17,7 +17,7 @@
 </style>
 </head>
 <body>
-
+<%@include file="..\navbar.jsp" %>
 <h1>Category Form</h1>
 <c:if test="${not empty msg}">
 <div style="background: lightgreen;color: blue; font-weight: bold;">
@@ -85,6 +85,6 @@ ${msg}
 
 </c:forEach>
 </table>
-
+<%@include file="..\footer.jsp" %>
 </body>
 </html>

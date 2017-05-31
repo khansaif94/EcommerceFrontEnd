@@ -11,8 +11,9 @@
 &nbsp;
 <a href="Product"  class="btn btn-info">MANAGE PRODUCT</a> &nbsp;
 <a href="Category" class="btn btn-info">MANAGE CATEGORY</a>&nbsp;
-<a href="Supplier" class="btn btn-info">MANAGE SUPPLIER</a>
-<br/><br/><br/><br/>
+<a href="Supplier" class="btn btn-info">MANAGE SUPPLIER</a>;
+
+<br/><br/><br/><br/><br/><br/><br/><br/>
 <%@include file="..\footer.jsp" %>
 </body>
 </html>

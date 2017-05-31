@@ -7,7 +7,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class HomeController {
 	
-	@RequestMapping("/")
+	@RequestMapping(value={"/","/Ecommerce"})
 	public String Home()
 	{
 		return"homepg";
@@ -30,12 +30,6 @@ public class HomeController {
 	public String Login()
 	{
 		return"Login";
-	}
-	
-	@RequestMapping("/reg")
-	public String Reg()
-	{
-		return"reg";
 	}
 	
 	@RequestMapping("/AdminHome")

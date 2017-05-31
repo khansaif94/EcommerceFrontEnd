@@ -35,18 +35,20 @@ public class ProductController {
 	Product product;
 	
 	@RequestMapping(value="/admin/saveProduct", method=RequestMethod.POST)
-	public ModelAndView addProduct(@ModelAttribute("product") @Valid Product pro, BindingResult  result,Model model){
+	public ModelAndView addProduct(HttpServletRequest request,@ModelAttribute("product") @Valid Product pro, BindingResult  result,Model model){
 	 if(result.hasErrors())
 	 {
 		 return new ModelAndView("/admin/Product");
 	 }
 	 else{
+		 pro.setImage(pro.getFile().getOriginalFilename());
+		 service.storeFile( pro, request);
 		boolean saved= service.saveProduct(pro);
 		if(saved)
 		{
 			model.addAttribute("msg","Product Saved Sucessfully");
 		}
-session.setAttribute("productList", service.getAllProducts());
+     session.setAttribute("productList", service.getAllProducts());
 		
 		ModelAndView mv=new ModelAndView("admin/Product");
 		mv.addObject("product",product);
@@ -74,6 +76,7 @@ session.setAttribute("productList", service.getAllProducts());
 			 return new ModelAndView("/admin/Product");
 		 }
 		 else{
+			 pro.setImage(pro.getFile().getOriginalFilename());
 			boolean saved= service.updateProduct(pro);
 			if(saved)
 			{
@@ -88,7 +91,7 @@ session.setAttribute("productList", service.getAllProducts());
 		
 		}
 	@RequestMapping(value="/admin/deleteProduct/{id}", method=RequestMethod.GET)
-	public ModelAndView ModelAndView (@PathVariable("id") String id)
+	public ModelAndView delete (@PathVariable("id") String id)
 	{
 		ModelAndView mv = new ModelAndView("/admin/Product");
 		Product pro =service.getProductById(id);
@@ -104,11 +107,7 @@ session.setAttribute("productList", service.getAllProducts());
 		return mv;		
 	}
 	
-	@SuppressWarnings("deprecation")
-	public void storeFile(Product p, HttpServletRequest request)
-	{
-		
-	}
+	
 	
 	
  

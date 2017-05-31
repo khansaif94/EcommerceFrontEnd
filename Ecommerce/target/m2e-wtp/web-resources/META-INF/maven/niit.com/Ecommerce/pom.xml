@@ -7,7 +7,7 @@
   <version>0.0.1-SNAPSHOT</version>
   <name>Ecommerce Maven Webapp</name>
   <url>http://maven.apache.org</url>
-  <dependencies>
+    <dependencies>
     <dependency>
     <groupId>junit</groupId>
     <artifactId>junit</artifactId>
@@ -18,7 +18,7 @@
 	      <artifactId>jstl</artifactId>
 	      <version>1.2</version>
  </dependency>
-	          <dependency>
+ <dependency>
 	            <groupId>taglibs</groupId>
 	            <artifactId>standard</artifactId>
 	            <version>1.1.2</version>
@@ -37,18 +37,33 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
 			<version>4.3.8.RELEASE</version>
-		</dependency>
-		
+		</dependency>	
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
 			<version>4.3.8.RELEASE</version>
-		</dependency>
-   
+		</dependency>				
      <dependency>
     <groupId>javax.servlet</groupId>
     <artifactId>javax.servlet-api</artifactId>
     <version>4.0.0-b05</version>
+</dependency> 
+ <dependency>
+        <artifactId>commons-fileupload</artifactId>
+        <groupId>commons-fileupload</groupId>
+        <version>1.2.2</version>
+        </dependency>
+        
+        <dependency>
+        <artifactId>commons-io</artifactId>
+        <groupId>commons-io</groupId>
+        <version>2.4</version>
+        </dependency>
+        <dependency>
+  <groupId>org.apache.maven.plugins</groupId>
+  <artifactId>maven-war-plugin</artifactId>
+  <version>3.1.0</version>
+  <type>maven-plugin</type>
 </dependency>  
   </dependencies>
   <build>
