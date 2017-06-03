@@ -1,4 +1,4 @@
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -28,7 +28,7 @@
       </li>
       <li><a href="Aboutus">About Us</a></li>
       <li><a href="Contactus">Contact Us</a></li>
-      <li><a href="AdminHome">Admin</a></li>
+      <li><a href="Product">All Product</a></li>
     </ul>
     
    <form class="navbar-form navbar-left">
@@ -42,10 +42,27 @@
       </div>
     </form>
     
+    <c:if test="${empty loggedInUser}"> 
     <ul class="nav navbar-nav navbar-right">
      <li><a href="User"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
      <li><a href="Login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
     </ul>
+    </c:if>
+    <c:if test="${not empty loggedInUser}"> 
+    <ul class="nav navbar-nav navbar-right">
+    <c:if test="${isAdmin}">
+   <li><a href="AdminHome">Admin</a></li>
+   </c:if>
+   <c:if test="${isUser}">
+   
+   <a href="#" class="btn btn-info btn-lg">
+          <span class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart
+        </a>
+    </c:if>
+   <li>WELCOME ${loggedInUser} </li>
+     <li><a href="j_spring_securitylogout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+    </ul>
+    </c:if>
   </div>
   </div>
 </nav>

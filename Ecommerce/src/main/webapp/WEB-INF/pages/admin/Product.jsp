@@ -18,7 +18,7 @@
 </head>
 <body>
 <%@include file="..\navbar.jsp" %>
-
+<c:if test="${isAdmin}">
 <h1>Product Form</h1>
 <c:if test="${not empty msg}">
 <div style="background: lightgreen;color: blue; font-weight: bold;">
@@ -110,9 +110,9 @@ ${msg}
  </c:if>
  <c:if test="${isEdit}">
  <input type="submit" value="Edit" />
- </c:if>
- 
+ </c:if> 
 </form:form>
+</c:if>
 
 <table border="1">
 <tr>
@@ -131,11 +131,24 @@ ${msg}
 	<td>${pro.productname}</td>
 	<td>${pro.price}</td>
 	<td>${pro.quantity}</td>
-	<td><a href="<c:url value='/admin/editProduct/${pro.productid}' />" >Edit</a>
-	<td><a href="<c:url value='/admin/deleteProduct/${pro.productid}' />">Delete</a>
+	<td><a href="<c:url value='/admin/editProduct/${pro.productid}' />" >View Product</a></td>
+	
+	<c:if test="${isAdmin}">
+	<td><a href="<c:url value='/admin/editProduct/${pro.productid}' />" >Edit</a></td>
+	<td><a href="<c:url value='/admin/deleteProduct/${pro.productid}' />">Delete</a></td>
+	</c:if>
+	
+	<c:if test="${empty loggedInUser}">
+	<td><a href="<c:url value='Login' />">Add To Cart</a></td>
+	</c:if>
+	
+	<c:if test="${isUser}">
+	
+	<td><a href="<c:url value='' />">Add To Cart</a></td>
+	</c:if>	
 </tr>
-
 </c:forEach>
+</table>
 <%@include file="..\footer.jsp" %>
 </body>
 </html>

@@ -65,10 +65,10 @@ public class ProductController {
 		ModelAndView mv = new ModelAndView("/admin/Product");
 		Product pro =service.getProductById(id);
 		mv.addObject("product", pro);
-		mv.addObject("isEdit",true);
-		
+		mv.addObject("isEdit",true);	
 		return mv;		
 	}
+	
 	@RequestMapping(value="/admin/editProduct", method=RequestMethod.POST)
 	public ModelAndView edit(@ModelAttribute("product") @Valid Product pro, BindingResult  result,Model model){
 		 if(result.hasErrors())
@@ -90,6 +90,7 @@ public class ProductController {
 		 }
 		
 		}
+	
 	@RequestMapping(value="/admin/deleteProduct/{id}", method=RequestMethod.GET)
 	public ModelAndView delete (@PathVariable("id") String id)
 	{
@@ -102,13 +103,6 @@ public class ProductController {
 			
 		}
 		mv.addObject("Product", new Product());
-		
-		
 		return mv;		
 	}
-	
-	
-	
-	
- 
 }

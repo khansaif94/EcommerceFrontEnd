@@ -9,13 +9,19 @@
 </head>
 <body>
 <%@include file="navbar.jsp" %>
+<c:if test="${not empty errmsg }">
+<div>
+	${errmsg}
+</div>
+</c:if>
+
 <div class="container">
 
-    <form class="form">       
+    <form class="form" action="j_spring_security_check" method="post">       
       <h2>Please Login</h2>
-      <input type="text" class="form-control" style="width:300px;" name="username" placeholder="Email Address/Username" required="" autofocus="" />
+      <input type="text" class="form-control" style="width:300px;" name="j_username" placeholder="Email Address/Username" required="" autofocus="" />
       <br/><br/>
-      <input type="password" class="form-control" style="width:300px;" name="password" placeholder="Password" required=""/> 
+      <input type="password" class="form-control" style="width:300px;" name="j_password" placeholder="Password" required=""/> 
       <br/><br/>     
      
         <input type="checkbox"   value="remember-me" id="rememberMe" name="rememberMe"> Remember me

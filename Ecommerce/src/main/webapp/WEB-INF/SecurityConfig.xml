@@ -1,0 +1,37 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:security="http://www.springframework.org/schema/security"
+          xmlns:context = "http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/security 
+       http://www.springframework.org/schema/security/spring-security.xsd
+       http://www.springframework.org/schema/context 
+   http://www.springframework.org/schema/context/spring-context.xsd  ">
+       <context:component-scan base-package = "com.niit"/>
+       <security:http auto-config="true">
+   <security:csrf disabled="true"/>
+   
+    <security:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/>
+    
+   <security:form-login login-page="/Login" 
+     authentication-failure-url="/failedlogin" 
+     login-processing-url="/j_spring_security_check" 
+     default-target-url="/welcome" 
+     username-parameter="j_username" 
+     password-parameter="j_password"/>
+    
+     <security:logout   logout-success-url="/logout"  invalidate-session="true"
+     logout-url="/j_spring_securitylogout"/>
+    </security:http>
+    <security:authentication-manager>
+    <security:authentication-provider>
+     
+    <security:jdbc-user-service
+                    data-source-ref="datasource"
+                    authorities-by-username-query="SELECT userid as username, userrole as role FROM user WHERE userid = ?"
+                    users-by-username-query="SELECT userid as username, password, 'true' as enabled FROM user WHERE userid = ?" />
+
+    </security:authentication-provider>
+    </security:authentication-manager>
+    </beans>
