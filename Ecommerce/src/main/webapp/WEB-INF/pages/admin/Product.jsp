@@ -20,6 +20,7 @@
 <%@include file="..\navbar.jsp" %>
 <c:if test="${isAdmin}">
 <h1>Product Form</h1>
+<center>
 <c:if test="${not empty msg}">
 <div style="background: lightgreen;color: blue; font-weight: bold;">
 ${msg}
@@ -62,6 +63,12 @@ ${msg}
    <tr>
    <td><form:label path="quantity">Quantity:</form:label></td>
    <td><form:input path="quantity"/></td>
+   <td></td>
+  </tr>
+  
+  <tr>
+   <td><form:label path="description">Description:</form:label></td>
+   <td><form:input path="description"/></td>
    <td></td>
   </tr>
   <tr>
@@ -114,6 +121,7 @@ ${msg}
 </form:form>
 </c:if>
 
+
 <table border="1">
 <tr>
 <th></th>
@@ -121,17 +129,19 @@ ${msg}
 		<th>NAME</th>
 		<th>PRICE</th>
 		<th>QTY</th>
+		<th>Description</th>
 		<th></th>
 		<th></th>
 </tr>
 <c:forEach var="pro"  items="${productList}">
 <tr>
-<td><img height="100" width="100" src="resources/images/${pro.image}"> </td>
+<td><img height="100" width="100" src="<c:url value='/resources/images/${pro.image}' /> "> </td>
 	<td>${pro.productid}</td>
 	<td>${pro.productname}</td>
 	<td>${pro.price}</td>
 	<td>${pro.quantity}</td>
-	<td><a href="<c:url value='/admin/editProduct/${pro.productid}' />" >View Product</a></td>
+	<td>${pro.description}</td>
+	<td><a href="<c:url value='/productdetails/${pro.productid}' /> " >View Product</a></td>
 	
 	<c:if test="${isAdmin}">
 	<td><a href="<c:url value='/admin/editProduct/${pro.productid}' />" >Edit</a></td>
@@ -144,11 +154,13 @@ ${msg}
 	
 	<c:if test="${isUser}">
 	
-	<td><a href="<c:url value='' />">Add To Cart</a></td>
+	<td><a href="<c:url value='/cart/add/${pro.productid}' />">Add To Cart</a></td>
 	</c:if>	
 </tr>
 </c:forEach>
 </table>
+</center>
+
 <%@include file="..\footer.jsp" %>
 </body>
 </html>

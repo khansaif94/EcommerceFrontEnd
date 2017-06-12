@@ -55,7 +55,7 @@
    </c:if>
    <c:if test="${isUser}">
    
-   <a href="#" class="btn btn-info btn-lg">
+   <a href="Cart" class="btn btn-info btn-lg">
           <span class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart
         </a>
     </c:if>

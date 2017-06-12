@@ -55,9 +55,6 @@ ${msg}
  </table> 
  	
  <input type="submit" value="register" />
-
- 
- 
 </form:form>
 <%@include file="footer.jsp" %>
 </body>

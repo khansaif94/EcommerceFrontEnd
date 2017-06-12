@@ -18,7 +18,7 @@ public class AdminController {
 	
 	@Autowired
 	CategoryService service;
-	
+
 	@Autowired
 	Category category;
 	

@@ -1,7 +1,5 @@
 package com.niit.controller;
 
-
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -31,9 +29,7 @@ public class ProductController {
 	@Autowired
 	ProductService service;
 	
-	@Autowired
-	Product product;
-	
+
 	@RequestMapping(value="/admin/saveProduct", method=RequestMethod.POST)
 	public ModelAndView addProduct(HttpServletRequest request,@ModelAttribute("product") @Valid Product pro, BindingResult  result,Model model){
 	 if(result.hasErrors())
@@ -51,13 +47,10 @@ public class ProductController {
      session.setAttribute("productList", service.getAllProducts());
 		
 		ModelAndView mv=new ModelAndView("admin/Product");
-		mv.addObject("product",product);
+		mv.addObject("product", new Product());
 		return mv;
 	 }
-	
 	}
-	
-	
 	
 	@RequestMapping(value="/admin/editProduct/{id}", method=RequestMethod.GET)
 	public ModelAndView edit(@PathVariable("id") String id)
@@ -70,13 +63,16 @@ public class ProductController {
 	}
 	
 	@RequestMapping(value="/admin/editProduct", method=RequestMethod.POST)
-	public ModelAndView edit(@ModelAttribute("product") @Valid Product pro, BindingResult  result,Model model){
+	public ModelAndView edit(HttpServletRequest request,@ModelAttribute("product") @Valid Product pro, BindingResult  result,Model model){
 		 if(result.hasErrors())
 		 {
 			 return new ModelAndView("/admin/Product");
 		 }
 		 else{
+			 if(pro.getFile()!=null){
 			 pro.setImage(pro.getFile().getOriginalFilename());
+			 service.storeFile(pro, request);
+			 }
 			boolean saved= service.updateProduct(pro);
 			if(saved)
 			{
@@ -85,10 +81,9 @@ public class ProductController {
 	session.setAttribute("productList", service.getAllProducts());
 			
 			ModelAndView mv=new ModelAndView("admin/Product");
-			mv.addObject("product",product);
+			mv.addObject("product", new Product());
 			return mv;
 		 }
-		
 		}
 	
 	@RequestMapping(value="/admin/deleteProduct/{id}", method=RequestMethod.GET)
@@ -102,7 +97,16 @@ public class ProductController {
 			session.setAttribute("productList", service.getAllProducts());
 			
 		}
-		mv.addObject("Product", new Product());
+		mv.addObject("product", new Product());
 		return mv;		
+	}
+	@RequestMapping("productdetails/{id}")
+	public ModelAndView productdetails (@PathVariable("id") String id)
+	{
+		ModelAndView mv = new ModelAndView("Display");
+		Product pro =service.getProductById(id);
+		mv.addObject("pro",pro);
+		return mv;
+		
 	}
 }
