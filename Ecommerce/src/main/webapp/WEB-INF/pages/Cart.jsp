@@ -10,6 +10,7 @@
 <body>
 <%@include file="navbar.jsp" %>
 ${msg}
+<c:if test="${not empty cartList}"> 
 <table class="table table-striped;">
 		<tr>
 			<th >Product Name:</th>
@@ -29,9 +30,13 @@ ${msg}
 		</table>
 		<h2>Total Cost : ${totalAmount}</h2>
 	<br>
-	<a href="">Checkout </a>
+	<a href="<c:url value='/Checkout/' />"><button type="button" class="btn btn-success">Checkout</button></a>
 	<br>
 	<br>
+	</c:if>
+<c:if test="${empty cartList}">
+<h2>No items in cart</h2>
+</c:if>
 <%@include file="footer.jsp" %>
 </body>
 </html>

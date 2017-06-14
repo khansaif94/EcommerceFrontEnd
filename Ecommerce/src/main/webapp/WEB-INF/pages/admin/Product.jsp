@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Product Form</title>
+<title>Product</title>
 <style type="text/css">
 .errStyle {
 	color:red;

@@ -4,12 +4,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Checkout Page</title>
 </head>
 <body>
 <%@include file="navbar.jsp" %>
 <h2>Thank You For Shopping With Us!!</h2>
-<h3> For Placing Your Order will get back with Your Product Within 7 Days at this following address and only Excepting Cash On Delivery</h3>
+<h3>Excepting Cash On Delivery only. Your Order will get back with Your Product Within 7 Days at this following address ${user.address} </h3>
 <br/><br/><br/><br/><br/><br/><br/>
 <%@include file="footer.jsp" %>
 </body>

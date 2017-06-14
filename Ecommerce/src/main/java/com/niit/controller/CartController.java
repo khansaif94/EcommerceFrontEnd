@@ -2,6 +2,8 @@ package com.niit.controller;
 
 import java.util.Collection;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -18,9 +20,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.niit.dao.CartDao;
+import com.niit.dao.OrderDao;
 import com.niit.dao.ProductDao;
+import com.niit.dao.UserDao;
 import com.niit.model.Cart;
+import com.niit.model.Order;
 import com.niit.model.Product;
+import com.niit.model.User;
 
 @Controller
 public class CartController {
@@ -34,6 +40,12 @@ public class CartController {
 
 	@Autowired
 	ProductDao productDao;
+	
+	@Autowired
+	OrderDao orderDao;
+	
+	@Autowired 
+	UserDao userDao;
 	
 	@Autowired
 	HttpSession session;
@@ -120,5 +132,33 @@ public class CartController {
 		return cart(model);
 		
 	}
+	
+	@RequestMapping("/Checkout")
+	public ModelAndView Checkout()
+	{
+		ModelAndView mv = new ModelAndView("Checkout");
+		
+		String loggedInUserid = (String) session.getAttribute("loggedInUserID");
+		User u = userDao.getUserById(loggedInUserid);
+		mv.addObject("user",u);
+		List<Cart> lt= cartDao.list(loggedInUserid);
+		for(Cart cart:lt)
+		{
+			orderDao.save(new Order(cart.getUser_name(),
+					cart.getProduct_name(),
+					cart.getPrice(),
+					cart.getStatus(),
+					cart.getQuantity(),
+					cart.getDate_added()
+					));
+		}
+		cartDao.deletebyId(loggedInUserid);
+		return mv;	
+	}
+	
+	
+	
+	
 }
+
 

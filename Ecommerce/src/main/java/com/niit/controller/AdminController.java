@@ -64,8 +64,7 @@ public class AdminController {
 		
 		ModelAndView mv=new ModelAndView("admin/Supplier");
 		mv.addObject("supplier",supplier);
-		return mv;
-		
+		return mv;	
 	}
 
 }
