@@ -60,7 +60,7 @@
           <span class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart
         </a>
     </c:if>
-   <li>WELCOME ${loggedInUser} </li>
+   <li><font size="3" color="white">WELCOME ${loggedInUser}</font></li>
      <li><a href="<c:url value='/j_spring_securitylogout'/>"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
     </ul>
     </c:if>

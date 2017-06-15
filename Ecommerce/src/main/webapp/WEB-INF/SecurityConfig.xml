@@ -11,9 +11,7 @@
        <context:component-scan base-package = "com.niit"/>
        <security:http auto-config="true">
    <security:csrf disabled="true"/>
-   
-    <security:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/>
-    
+    <security:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/>    
    <security:form-login login-page="/Login" 
      authentication-failure-url="/failedlogin" 
      login-processing-url="/j_spring_security_check" 
@@ -25,8 +23,7 @@
      logout-url="/j_spring_securitylogout"/>
     </security:http>
     <security:authentication-manager>
-    <security:authentication-provider>
-     
+    <security:authentication-provider>     
     <security:jdbc-user-service
                     data-source-ref="datasource"
                     authorities-by-username-query="SELECT userid as username, userrole as role FROM user WHERE userid = ?"

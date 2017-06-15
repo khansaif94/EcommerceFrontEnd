@@ -139,6 +139,11 @@ public class CartController {
 		ModelAndView mv = new ModelAndView("Checkout");
 		
 		String loggedInUserid = (String) session.getAttribute("loggedInUserID");
+
+		if (loggedInUserid == null) {
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+			loggedInUserid = auth.getName();
+		}
 		User u = userDao.getUserById(loggedInUserid);
 		mv.addObject("user",u);
 		List<Cart> lt= cartDao.list(loggedInUserid);
@@ -154,11 +159,7 @@ public class CartController {
 		}
 		cartDao.deletebyId(loggedInUserid);
 		return mv;	
-	}
-	
-	
-	
-	
+	}	
 }
 
 

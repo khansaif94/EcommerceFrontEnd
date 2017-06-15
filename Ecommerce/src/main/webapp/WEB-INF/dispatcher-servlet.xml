@@ -22,7 +22,5 @@
         class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         </bean>
    <mvc:resources mapping = "/resources/**" location = "/WEB-INF/resources/" />
-   
    <mvc:annotation-driven/>
-   
 </beans>
